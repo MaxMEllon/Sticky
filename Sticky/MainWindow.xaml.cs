@@ -21,16 +21,23 @@ namespace Sticky
     /// </summary>
     public partial class MainWindow : Window
     {
+
+        public int WindowId = 0;
+        private MainViewModel selfVM;
+
         public MainWindow()
         {
             InitializeComponent();
-            this.DataContext = new MainViewModel(this);
+            selfVM = new MainViewModel(this);
+            selfVM.WindowId = this.WindowId;
+            this.DataContext = selfVM;
             this.MouseLeftButtonDown += (sender, e) => this.DragMove();
         }
 
-        private void TextBox_PreviewMouseDown(object sender, MouseButtonEventArgs e)
+        public MainWindow(int id) : this()
         {
-
+            this.WindowId = selfVM.WindowId = id;
         }
+
     }
 }

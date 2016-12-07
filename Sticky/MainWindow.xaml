@@ -8,10 +8,11 @@
         Title="MainWindow"
         WindowStyle="None"
         Topmost="True"
-        Height="150"
+        Height="215"
         Background="Transparent"
         AllowsTransparency="True"
-        Width="300"
+        Width="291"
+        ResizeMode="CanResize"
         >
     <Border BorderBrush="#FF007ACC"
             Background="#FF2D2D30"
@@ -23,15 +24,89 @@
                               Color="#FF007ACC" />
         </Border.Effect>
         <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition MaxHeight="20px" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <Grid Row="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="20px" />
+                </Grid.ColumnDefinitions>
+            </Grid>
+            <Button Grid.Row="0"
+                    HorizontalAlignment="Right"
+                    Width="20px"
+                    Foreground="White"
+                    BorderThickness="0px"
+                    Content="✖"
+                    Background="Red"
+                    Command="{Binding CloseSubSticky}"
+                    CommandParameter="{Binding WindowId}"
+                    BorderBrush="Transparent" />
+            <Button Grid.Row="1" Grid.Column="1"
+                    HorizontalAlignment="Right"
+                    VerticalAlignment="Top"
+                    Width="20px"
+                    Height="20px"
+                    Margin="0,20,0,0"
+                    Foreground="White"
+                    BorderThickness="0px"
+                    Content="＋"
+                    Background="Blue"
+                    Command="{Binding OpenSubSticky}"
+                    CommandParameter="{Binding WindowId}"
+                    BorderBrush="Transparent" />
+            <Button Grid.Row="1" Grid.Column="1"
+                    HorizontalAlignment="Right"
+                    VerticalAlignment="Top"
+                    Width="20px"
+                    Height="20px"
+                    Foreground="White"
+                    Margin="0,40,0,0"
+                    BorderThickness="0px"
+                    Content="▲"
+                    Background="Green"
+                    CommandParameter="{Binding WindowId}"
+                    Command="{Binding IncreaseFontSize}"
+                    BorderBrush="Transparent" />
+            <Button Grid.Row="1" Grid.Column="1"
+                    HorizontalAlignment="Right"
+                    VerticalAlignment="Top"
+                    Width="20px"
+                    Height="20px"
+                    Margin="0,60,0,0"
+                    Foreground="White"
+                    BorderThickness="0px"
+                    Background="Green"
+                    Content="▼"
+                    CommandParameter="{Binding WindowId}"
+                    Command="{Binding DecreaseFontSize}"
+                    BorderBrush="Transparent" />
+            <Button Grid.Row="1" Grid.Column="1"
+                    HorizontalAlignment="Right"
+                    VerticalAlignment="Top"
+                    Width="20px"
+                    Height="20px"
+                    Margin="0,80,0,0"
+                    Foreground="White"
+                    BorderThickness="0px"
+                    Background="Cyan"
+                    Content="●"
+                    CommandParameter="{Binding WindowId}"
+                    Command="{Binding OpenColorPalette}"
+                    BorderBrush="Transparent" />
             <TextBox
+                Name="StickyTextContent"
+                Grid.Row="1"
+                Grid.Column="0"
+                BorderBrush="#FF007ACC"
                 Background="Transparent"
                 Foreground="White"
-                Width="1"
-                Height="1"
-               >
-                <TextBox.InputBindings>
-                    <MouseBinding Command="{Binding Drag}" />
-                </TextBox.InputBindings>
+                Width="Auto"
+                Height="Auto"
+                AcceptsReturn="True"
+                TextWrapping="Wrap" Margin="0,0,20,0" >
             </TextBox>
         </Grid>
     </Border>
