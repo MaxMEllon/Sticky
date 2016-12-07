@@ -1,0 +1,38 @@
+﻿<Window x:Class="Sticky.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Sticky"
+        mc:Ignorable="d"
+        Title="MainWindow"
+        WindowStyle="None"
+        Topmost="True"
+        Height="150"
+        Background="Transparent"
+        AllowsTransparency="True"
+        Width="300"
+        >
+    <Border BorderBrush="#FF007ACC"
+            Background="#FF2D2D30"
+            BorderThickness="1"
+            Margin="10">
+        <Border.Effect>
+            <DropShadowEffect ShadowDepth="0"
+                              BlurRadius="20"
+                              Color="#FF007ACC" />
+        </Border.Effect>
+        <Grid>
+            <TextBox
+                Background="Transparent"
+                Foreground="White"
+                Width="1"
+                Height="1"
+               >
+                <TextBox.InputBindings>
+                    <MouseBinding Command="{Binding Drag}" />
+                </TextBox.InputBindings>
+            </TextBox>
+        </Grid>
+    </Border>
+</Window>
