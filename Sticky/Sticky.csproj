@@ -59,8 +59,13 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Util\NativeMethods.cs" />
     <Compile Include="Util\RelayCommand.cs" />
     <Compile Include="Util\ViewModelBase.cs" />
+    <Compile Include="Util\Win32\GWL.cs" />
+    <Compile Include="Util\Win32\SWP.cs" />
+    <Compile Include="Util\Win32\WM.cs" />
+    <Compile Include="Util\Win32\WSEX.cs" />
     <Compile Include="ViewModel\MainViewModal.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
