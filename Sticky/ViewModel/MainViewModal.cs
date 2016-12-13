@@ -8,12 +8,6 @@ namespace Sticky.ViewModel
 {
     public class MainViewModel : ViewModelBase
     {
-        public ICommand DecreaseFontSize { get; private set; }
-        public ICommand IncreaseFontSize { get; private set; }
-        public ICommand OpenSubSticky { get; private set; }
-        public ICommand CloseSubSticky { get; private set; }
-        public ICommand OpenColorPalette { get; private set; }
-
         private int _WindowId = 0;
         public int WindowId
         {
@@ -53,34 +47,41 @@ namespace Sticky.ViewModel
             window.Show();
         }
 
+        private void handleCloseSubSticky(int id)
+        {
+            if (stickyList.Count == 1) this.view.Close();
+            else stickyList[id].Close();
+        }
+
+        private void handleOpenColorPalette(int id)
+        {
+            ColorDialog colorDialog = new ColorDialog();
+            if (colorDialog.ShowDialog() == DialogResult.OK)
+            {
+                MainWindow target = stickyList[id];
+                Color color = Color.FromArgb(colorDialog.Color.A,
+                                             colorDialog.Color.R,
+                                             colorDialog.Color.G,
+                                             colorDialog.Color.B);
+                target.StickyTextContent.Foreground = new SolidColorBrush(color);
+            }
+        }
+
+        public ICommand DecreaseFontSize { get; private set; }
+        public ICommand IncreaseFontSize { get; private set; }
+        public ICommand OpenSubSticky { get; private set; }
+        public ICommand CloseSubSticky { get; private set; }
+        public ICommand OpenColorPalette { get; private set; }
+
         public MainViewModel(MainWindow view)
         {
             this.view = view;
             stickyList.Add(view);
-
-            DecreaseFontSize = new RelayCommand((id) => this.handleDecreaseFontSize((int)id));
-            IncreaseFontSize = new RelayCommand((id) => this.handleIncreaseFontSize((int)id));
-            OpenSubSticky = new RelayCommand((_) => this.handleOpenSubSticky());
-
-            CloseSubSticky = new RelayCommand((id) =>
-            {
-                if (stickyList.Count == 1) this.view.Close();
-                else stickyList[(int)id].Close();
-            });
-
-            OpenColorPalette = new RelayCommand((id) =>
-            {
-                ColorDialog colorDialog = new ColorDialog();
-                if (colorDialog.ShowDialog() == DialogResult.OK)
-                {
-                    MainWindow target = stickyList[(int)id];
-                    Color color = Color.FromArgb(colorDialog.Color.A,
-                                                 colorDialog.Color.R,
-                                                 colorDialog.Color.G,
-                                                 colorDialog.Color.B);
-                    target.StickyTextContent.Foreground = new SolidColorBrush(color);
-                }
-            });
+            OpenSubSticky = new RelayCommand((_) => handleOpenSubSticky());
+            CloseSubSticky = new RelayCommand((id) => handleCloseSubSticky((int)id));
+            OpenColorPalette = new RelayCommand((id) => handleOpenColorPalette((int)id));
+            DecreaseFontSize = new RelayCommand((id) => handleDecreaseFontSize((int)id));
+            IncreaseFontSize = new RelayCommand((id) => handleIncreaseFontSize((int)id));
         }
     }
 }
